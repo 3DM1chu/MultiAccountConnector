@@ -1,0 +1,6 @@
+@MultiAccountCreatorBackend_HostAddress = http://localhost:5225
+
+GET {{MultiAccountCreatorBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
