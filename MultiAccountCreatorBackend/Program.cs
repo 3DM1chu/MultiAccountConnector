@@ -24,6 +24,16 @@ builder.Services.AddDbContext<AccountsDataContext>(options =>
         .LogTo(Console.WriteLine, LogLevel.Error) // Logs EF Core events and SQL queries
 );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -46,6 +56,7 @@ app.MapSwagger();
 //app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())
 {
