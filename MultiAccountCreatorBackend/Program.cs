@@ -26,6 +26,16 @@ builder.Services.AddDbContext<AccountsDataContext>(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +55,7 @@ app.MapSwagger();
 
 //app.UseAuthorization();
 
+app.UseCors("AllowAll");
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
