@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <label>Name</label>
+  <input #name="ngModel" name="name" [(ngModel)]="accountDetails.name" required>
+  <br/>
+
+  <label>Email</label>
+  <input #email="ngModel" type="email" name="email" [(ngModel)]="accountDetails.email" required>
+  <br/>
+
+  <label>Service name</label>
+  <select name="serviceName" [(ngModel)]="accountDetails.serviceName" required>
+    <option [value]="'Uber'">Uber</option>
+    <option [value]="'Aliexpress'">Aliexpress</option>
+  </select>
+  <br/>
+
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+</form>
